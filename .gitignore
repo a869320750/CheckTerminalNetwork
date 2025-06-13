@@ -1,0 +1,8 @@
+config.json
+data/
+logs/
+htmls/
+htmls_bak/
+oldhtmls/
+__pycache__/
+*.pyc
