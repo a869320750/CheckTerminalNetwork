@@ -48,11 +48,14 @@ import time
 import re
 import sys
 import csv
+import os
 from web_config import set_web_config
+from serial_config import update_device_config_via_serial
 
 # 串口配置
-SERIAL_PORT = 'COM49'
-BAUDRATE = 115200
+SERIAL_PORT = 'COM9'
+#BAUDRATE = 115200
+BAUDRATE = 1500000
 TIMEOUT = 10
 
 # 忽略列表，用于过滤串口输出中的无用信息
@@ -284,6 +287,41 @@ def main_check():
     with serial.Serial(SERIAL_PORT, BAUDRATE, timeout=TIMEOUT) as ser:
         return perform_network_check(ser)
 
+import os
+
+def main_update_with_config(index):
+    """
+    仅配置第 index 个设备，并保存 config.json 到本地 htmls/Axx.config
+    :param index: 设备索引
+    """
+    device_info = get_device_info(index)
+    if not device_info:
+        print(f"未找到第{index}个设备信息")
+        return
+    print(f"选中设备: {device_info['device_name']}")
+    config_dict = {
+        "mqtt_server_ip": device_info["mqtt_server_ip"],
+        "device_name": device_info["device_name"],
+        "device_secret": device_info["device_secret"],
+        "product_key": device_info["product_key"]
+    }
+    with serial.Serial(SERIAL_PORT, BAUDRATE, timeout=TIMEOUT) as ser:
+        update_device_config_via_serial(ser, config_dict)
+        # 获取 config.json 内容
+        ser.write(b"cat /usr/dkkj/config.json\n")
+        time.sleep(1)
+        lines = []
+        while ser.in_waiting:
+            line = ser.readline().decode(errors="ignore")
+            lines.append(line)
+        config_content = ''.join(lines)
+        # 保存到本地
+        os.makedirs("htmls", exist_ok=True)
+        local_path = f"htmls/A{index}.config"
+        with open(local_path, "w", encoding="utf-8") as f:
+            f.write(config_content)
+        print(f"已保存 config.json 到本地 {local_path}")
+
 def main_update(index):
     """
     仅配置第 index 个设备
@@ -307,7 +345,7 @@ def main_check_update(index):
         print("网络检测未通过，终止后续操作。")
         return
     print("网络检测通过，开始执行更新流程。")
-    main_update(index)
+    main_update_with_config(index)
 
 if __name__ == "__main__":
     print("========== 终端自动检测与配置工具 ==========")

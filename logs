@@ -1,0 +1,51 @@
+$ python web_config.py 
+
+DevTools listening on ws://127.0.0.1:34600/devtools/browser/a79f2a89-9a99-46b0-8cc5-bd2fe8f3a929
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1749096670.403633    3236 voice_transcription.cc:58] Registering VoiceTranscriptionCapability
+Traceback (most recent call last):
+  File "D:\Codes\CheckTerminalNetwork\web_config.py", line 41, in <module>
+    set_web_config(form_data, url)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Codes\CheckTerminalNetwork\web_config.py", line 26, in set_web_config
+    driver.find_element(By.NAME, "config_submit").click()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\86932\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webelement.py", line 121, in click
+    self._execute(Command.CLICK_ELEMENT)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\86932\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webelement.py", line 574, in _execute
+    return self._parent.execute(command, params)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\86932\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 447, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\86932\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response    
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element is not clickable at point (154, 970)
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+        GetHandleVerifier [0x0x7ff6fb05fea5+79173]
+        GetHandleVerifier [0x0x7ff6fb05ff00+79264]
+        (No symbol) [0x0x7ff6fae19e5a]
+        (No symbol) [0x0x7ff6fae78599]
+        (No symbol) [0x0x7ff6fae75f32]
+        (No symbol) [0x0x7ff6fae72f71]
+        (No symbol) [0x0x7ff6fae71e61]
+        (No symbol) [0x0x7ff6fae63464]
+        (No symbol) [0x0x7ff6fae9896a]
+        (No symbol) [0x0x7ff6fae62d16]
+        (No symbol) [0x0x7ff6fae98b80]
+        (No symbol) [0x0x7ff6faec100d]
+        (No symbol) [0x0x7ff6fae98743]
+        (No symbol) [0x0x7ff6fae614c1]
+        (No symbol) [0x0x7ff6fae62253]
+        GetHandleVerifier [0x0x7ff6fb32a2dd+3004797]
+        GetHandleVerifier [0x0x7ff6fb32472d+2981325]
+        GetHandleVerifier [0x0x7ff6fb343380+3107360]
+        GetHandleVerifier [0x0x7ff6fb07aa2e+188622]
+        GetHandleVerifier [0x0x7ff6fb0822bf+219487]
+        GetHandleVerifier [0x0x7ff6fb068df4+115860]
+        GetHandleVerifier [0x0x7ff6fb068fa9+116297]
+        GetHandleVerifier [0x0x7ff6fb04f558+11256]
+        BaseThreadInitThunk [0x0x7ffde827e8d7+23]
+        RtlUserThreadStart [0x0x7ffde8e7c5dc+44]
